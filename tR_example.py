@@ -79,7 +79,7 @@ tR.output_to_tif(output_filename,data_out)
 
 # User specifications
 in_main_filename = 'TR_EXAMPLE_segmentation.tif'
-in_other_filenames = ['TR_EXAMPLE_green.tif','TR_EXAMPLE_RED.tif']
+in_other_filenames = ['TR_EXAMPLE_green.tif','TR_EXAMPLE_red.tif']
 output_filename = 'TR_EXAMPLE_RIPPED2.tif'
 scale_factor = 1.3
 
@@ -88,6 +88,17 @@ data_stack = tR.input_from_tif(in_main_filename,additional_channels=in_other_fil
 
 # Expand the tissue
 data_out = tR.rip_tissue(data_stack,scale_factor,be_verbose=True)
+print(data_out.shape)
+print(data_stack.shape)
+import napari
+
+with napari.gui_qt():
+    v=napari.Viewer()
+    v.add_labels(data_stack[0, ...])
+    v.add_labels(data_out[0, ...])
+    v.add_image(data_stack[1:,...])
+    v.add_image(data_out[1:,...])
+
 
 # Save the data using output function
 tR.output_to_tif(output_filename,data_out)

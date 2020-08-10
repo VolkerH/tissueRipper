@@ -370,7 +370,7 @@ def input_from_tif(filename, channel_num=1, additional_channels=None):
         if channel_num > 1:
             
             # Initialize 4D array of appropriate size
-            img4d = np.zeros((channel_num,imported_img.shape[0]/channel_num,imported_img.shape[1],imported_img.shape[2]),dtype=type(imported_img.flatten()[0]))
+            img4d = np.zeros((channel_num,int(imported_img.shape[0]/channel_num),imported_img.shape[1],imported_img.shape[2]),dtype=type(imported_img.flatten()[0]))
             
             # Funky looping construct to transform   
             for i,j in enumerate(range(0,len(imported_img),channel_num)):
